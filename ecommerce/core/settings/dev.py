@@ -15,12 +15,8 @@ SECRET_KEY = '!zyug(eagykp+np1g-5jm0eb7r2h%$ksw1v3^74k0j5s-u99)('
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "0.0.0.0",
-    "localhost",
-    "[::1]"
-]
+ALLOWED_HOSTS = ['*']
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -29,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ariadne.contrib.django',
     'apps.customers',
     'apps.orders',
     'apps.products',
@@ -66,10 +63,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ecommerce',
+        'USER': 'ecommerce',
+        'PASSWORD': '1234',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -85,6 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 AUTH_USER_MODEL = 'customers.Customer'
 
 LANGUAGE_CODE = 'pt-br'

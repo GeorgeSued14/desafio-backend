@@ -1,0 +1,20 @@
+scalar Datetime
+
+type Query {
+  customers: [Customer!]
+  customer(customer_id: ID!): Customer!
+
+  orders: [Order!]
+  order(order_id: ID!): OrderResults!
+
+  products: [Product!]
+  product(product_id: ID, name: String): Product!
+}
+
+type Mutation {
+  createCustomer(input: CustomerInput!): CustomerResults!
+
+  createOrder(customer_id: ID!, input: [OrderProductInput]!): OrderResults!
+
+  createProduct(input: ProductInput!): ProductResults
+}

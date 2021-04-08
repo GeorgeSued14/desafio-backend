@@ -1,0 +1,21 @@
+type Product {
+  id: ID
+  name: String
+  price: Float
+  quantity: Int
+  created_at: Datetime
+  updated_at: Datetime
+}
+
+type ProductResults {
+  ok: Boolean!
+  product: Product!
+  err: String
+}
+
+input ProductInput {
+  name: String!
+  price: Float!
+  description: String
+  quantity: Int
+}

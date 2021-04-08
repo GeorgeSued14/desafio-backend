@@ -39,6 +39,10 @@ class UserManager(BaseUserManager):
 
 
 class Customer(AbstractBaseUser, PermissionsMixin):
+    class Meta:
+        db_table = "customer"
+        ordering = ['-created_at']
+    
     email = models.EmailField(
         verbose_name=_('email address'),
         max_length=255,
@@ -46,7 +50,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
     )
 
     name = models.CharField(
-        verbose_name=_('name'),
+        verbose_name=_('username'),
         max_length=50,
         blank=True
     )
