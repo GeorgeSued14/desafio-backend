@@ -44,13 +44,13 @@ class Customer(AbstractBaseUser, PermissionsMixin):
         ordering = ['-created_at']
     
     email = models.EmailField(
-        verbose_name=_('email address'),
+        verbose_name=_('email'),
         max_length=255,
         unique=True
     )
 
     name = models.CharField(
-        verbose_name=_('username'),
+        verbose_name=_('customer name'),
         max_length=50,
         blank=True
     )

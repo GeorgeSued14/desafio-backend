@@ -9,7 +9,8 @@ type Product {
 
 type ProductResults {
   ok: Boolean!
-  product: Product!
+  product: Product
+  msg: String
   err: String
 }
 

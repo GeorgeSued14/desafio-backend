@@ -9,7 +9,7 @@ type Customer {
 
 type CustomerResults {
   ok: Boolean!
-  customer: Customer!
+  customer: Customer
   err: String
 }
 

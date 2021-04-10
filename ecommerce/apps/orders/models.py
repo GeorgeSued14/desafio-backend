@@ -58,6 +58,10 @@ class OrderProduct(models.Model):
         verbose_name=_('quantity'),
         default=1
     )
+    total = models.FloatField(
+        verbose_name=_('item total'),
+        default=0
+    ) 
     created_at = models.DateTimeField(
         verbose_name=_('created_at'),
         auto_now_add=True
@@ -69,6 +73,8 @@ class OrderProduct(models.Model):
     def __str__(self):
         return '{} <{}>'.format(self.id, self.product_id)
 
-    def get_total_item_price(self):
-        return self.quantity * self.product.price
+    def get_total_items_price(self):
+        return self.quantity * self.product_id.price 
+        
+        
         

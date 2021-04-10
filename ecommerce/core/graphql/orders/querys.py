@@ -1,6 +1,7 @@
 from django.db.models import Q
 
 from ariadne import QueryType
+from ariadne_jwt.decorators import login_required
 
 from apps.orders.models import Order, OrderProduct
 from apps.customers.models import Customer
@@ -11,11 +12,13 @@ from apps.products.models import Product
 query = QueryType()
 
 @query.field('orders')
-def resolve_orders(*_):
+@login_required
+def resolve_orders(self, info, **kwarg):
     return Order.objects.all()
 
 @query.field('order')
-def resolve_order(_, info, order_id):
+@login_required
+def resolve_order(self, info, order_id, **kwarg):
 
     order = Order.objects.get(pk=order_id)
     customer = Customer.objects.get(pk=order.customer_id.id)

@@ -1,12 +1,15 @@
+
 from ariadne import MutationType
 
 from apps.customers.models import Customer
+from core.utils.decorators import check_email_exists
 
 mutation = MutationType()
 
 @mutation.field('createCustomer')
-def resolve_create_customer(_, info, input):
-    customer = Customer.objects.create(
+@check_email_exists
+def resolve_create_customer(self, info, input, **kwarg):
+    customer = Customer(
         name=input["name"],
         email=input["email"],
     )

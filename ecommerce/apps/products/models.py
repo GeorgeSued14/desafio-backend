@@ -1,5 +1,8 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 from django.utils.translation import gettext_lazy as _
+
+from core.utils.handle_message import messages
 
 class Product(models.Model):
     class Meta:
@@ -22,8 +25,9 @@ class Product(models.Model):
         null=True
     )
     quantity = models.IntegerField(
-        verbose_name=_('quantity'),
-        default=0
+        verbose_name=_('stock quantity'),
+        default=0,
+        validators=[MinValueValidator(0)]
     )
     
     created_at = models.DateTimeField(
@@ -38,8 +42,34 @@ class Product(models.Model):
     def __str__(self):
         return '{} <{}>'.format(self.id, self.name)
     
-    def remove_unit(self):
-        if self.quantity == 0:
-            return '{} has no item in stock'.format(self.name)
-        quantity=-1
-        return quantity
+    @property
+    def verify_stock(self):
+        if self.quantity > 0:
+            return True
+
+    def low_items_stock(self):
+        if self.verify_stock:
+            if self.quantity <= int(5):
+                return '{}. Quantity:{}'.format(
+                    messages('low_stock'), 
+                    self.quantity
+                )
+            else:
+                return False
+        return messages('not_stock')
+
+    def add_items_stock(self, quantity):
+        self.quantity = self.quantity + quantity
+        self.save()
+                
+    def get_items_stock(self, quantity):
+        if self.verify_stock:
+            if quantity > self.quantity:
+                return messages('greater_than_stock')
+                
+            self.quantity = self.quantity - quantity
+            self.save()
+        
+            return quantity
+    
+        return messages('not_stock')

@@ -16,9 +16,10 @@ type OrderProduct {
 
 type OrderResults {
   ok: Boolean!
-  customer: Customer!
-  order: Order!
+  customer: Customer
+  order: Order
   items: [OrderProduct!]
+  msg: String
   err: String
 }
 
