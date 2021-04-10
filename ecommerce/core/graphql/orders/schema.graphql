@@ -1,0 +1,29 @@
+type Order {
+  id: ID!
+  customer_id: ID!
+  created_at: Datetime!
+  updated_at: Datetime!
+}
+
+type OrderProduct {
+  order_id: ID!
+  product_id: ID!
+  quantity: Int!
+  total: Float
+  created_at: Datetime!
+  updated_at: Datetime!
+}
+
+type OrderResults {
+  ok: Boolean!
+  customer: Customer
+  order: Order
+  items: [OrderProduct!]
+  msg: String
+  err: String
+}
+
+input OrderProductInput {
+  product: ID!
+  quantity: ID!
+}

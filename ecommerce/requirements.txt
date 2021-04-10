@@ -1,6 +1,11 @@
-Django==3.1.7
-graphene-django==2.15.0
-graphene==2.1.8
-graphql-core==2.3.2
-graphql-relay==2.0.1
+Django==3.1
+
+ariadne==0.12.0
+ariadne-jwt==0.1.4
+
 python-dotenv==0.17.0
+selenium==3.141.0
+webdriver-manager==3.3.0
+
+psycopg2-binary
+gunicorn
