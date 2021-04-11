@@ -30,4 +30,4 @@ RUN pip3 install psycopg2 pipenv
 COPY ./Pipfile /app/Pipfile
 RUN pipenv install --skip-lock --system --dev
 
-COPY . /app/
+COPY ./ecommerce/ /app/
