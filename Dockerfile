@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip3 install --upgrade pip 
 RUN pip3 install psycopg2 pipenv
 
-COPY ./Pipfile /app/Pipfile
+COPY ./ecommerce/Pipfile /app/Pipfile
 RUN pipenv install --skip-lock --system --dev
 
 COPY ./ecommerce/ /app/
