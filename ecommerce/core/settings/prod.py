@@ -10,7 +10,10 @@ from pathlib import Path
 from datetime import timedelta
 
 from django.core.management.utils import get_random_secret_key
+
 import dj_database_url
+import django_heroku
+
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=".env")
@@ -118,3 +121,5 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
+django_heroku.settings(locals())
