@@ -1,6 +1,6 @@
 .vscode 
 __pycache__
 
-# environments
-env
 .env.prod
+
+db.sqlite3

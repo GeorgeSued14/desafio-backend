@@ -33,19 +33,25 @@ máquina local:
 git clone https://github.com/GeorgeSued14/desafio-backend.git
 ```
 
-Em seguida os seguintes comandos:
+- Em seguida os seguintes comandos:
 
 ```
 > cd desafio-backend
-> docker-compose -f docker-compose.dev.yml -d up
+> docker-compose -f docker-compose.dev.yml build
+> docker-compose -f docker-compose.dev.yml up -d 
 > docker exec -it django /bin/sh -c "python manage.py makemigrations && 
 python manage.py migrate"
 ``` 
-
-Para criar o usuário root da aplicação
+- Para criar o usuário root da aplicação
 
 ```
 docker exec -it django /bin/sh -c "python manage.py createsuperuser"
+```
+
+- No navegador digite:
+
+```
+http://localhost:8000/graphql
 ```
 
 Pronto!

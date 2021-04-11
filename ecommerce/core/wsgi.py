@@ -7,7 +7,7 @@ from ariadne.wsgi import GraphQL, GraphQLMiddleware
 from core.graphql.config import schema
 
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(dotenv_path='.env')
 
 settings = os.getenv('DJANGO_SETTINGS_MODULE')
 

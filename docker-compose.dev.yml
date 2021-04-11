@@ -15,11 +15,11 @@ services:
             - pg_data:/var/lib/postgresql/data
         networks: 
             - backend
-    django:
-        container_name: django
+    web:
+        container_name: web
         build:
             context: ./ecommerce
-            dockerfile: Dockerfile.dev
+            dockerfile: Dockerfile.web
         env_file: 
             - ./ecommerce/.env.dev
         ports:

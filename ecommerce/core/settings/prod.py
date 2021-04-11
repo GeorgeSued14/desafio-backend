@@ -9,17 +9,19 @@ import os
 from pathlib import Path
 from datetime import timedelta
 
+from django.core.management.utils import get_random_secret_key
+import dj_database_url
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(dotenv_path=".env")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = str(os.getenv("SECRET_KEY"))
+SECRET_KEY = str(get_random_secret_key())
 
 DEBUG = False
 
-ALLOWED_HOSTS = str(os.getenv("ALLOWED_HOSTS")).split(" ")
+ALLOWED_HOSTS = ['desafio-klutch.herokuapp.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -57,7 +59,6 @@ GRAPHQL_JWT = {
     'JWT_EXPIRATION_DELTA': timedelta(seconds=60 * 10)
 }
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -77,15 +78,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ecommerce',
-        'USER': 'ecommerce',
-        'PASSWORD': '1234',
-        'HOST': 'db',
-        'PORT': 5432,
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
+
+DATABASE_URL = str(os.environ.get('DATABASE_URL'))
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 AUTH_PASSWORD_VALIDATORS = [

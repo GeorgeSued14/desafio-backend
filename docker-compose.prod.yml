@@ -3,37 +3,34 @@ version: "3.7"
 services:
 
     db:
-        container_name: db
+        restart: always
         build:
             context: ./db
             dockerfile: Dockerfile
         ports:
             - 5432:5432    
         env_file: 
-            - ./db/.env.dev
+            - ./db/.env
         volumes: 
             - pg_data:/var/lib/postgresql/data
         networks: 
             - backend
-    django:
-        container_name: django
+            
+    web:
+        container_name: web
         build:
             context: ./ecommerce
-            dockerfile: Dockerfile.dev
+            dockerfile: Dockerfile.web
         env_file: 
-            - ./ecommerce/.env.prod
-        ports:
-            - 8000:8000
+            - ./ecommerce/.env
+        expose:
+            - 8000
         volumes:
             - ./ecommerce/:/app
-        command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+        # command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
         networks: 
             - backend
-        links:
-            - db:db
-        depends_on:
-            - db
-        
+
 
 volumes:    
     pg_data:
