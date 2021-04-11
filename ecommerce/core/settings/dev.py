@@ -5,9 +5,13 @@ Django settings for core project.
 This project using Django 3.1.7.
 
 """
-
+import os
 from pathlib import Path
 from datetime import timedelta
+
+from dotenv import load_dotenv
+
+load_dotenv(dotenv_path='.env.dev')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -16,8 +20,7 @@ SECRET_KEY = '!zyug(eagykp+np1g-5jm0eb7r2h%$ksw1v3^74k0j5s-u99)('
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = str(os.getenv("ALLOWED_HOSTS")).split(" ")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -76,11 +79,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ecommerce',
-        'USER': 'ecommerce',
-        'PASSWORD': '1234',
-        'HOST': 'db',
-        'PORT': 5432,
+        'NAME': str(os.getenv('DB_NAME')),
+        'USER': str(os.getenv('DB_USER')),
+        'PASSWORD': str(os.getenv('DB_PASSWORD')),
+        'HOST': str(os.getenv('DB_HOST')),
+        'PORT': str(os.getenv('DB_PORT')),
     }
 }
 
