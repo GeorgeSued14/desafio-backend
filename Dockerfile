@@ -5,7 +5,7 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=config.settings.prod \
+    DJANGO_SETTINGS_MODULE=core.settings.prod \
     PORT=8000 \
     WEB_CONCURRENCY=3
 
@@ -35,5 +35,3 @@ RUN pipenv install --skip-lock --system --dev
 
 COPY ./ecommerce/ /app/
 
-RUN python manage.py collectstatic --noinput --clear
-RUN python manage.py migrate

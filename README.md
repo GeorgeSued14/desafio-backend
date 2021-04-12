@@ -54,4 +54,11 @@ docker exec -it web /bin/sh -c "python manage.py createsuperuser"
 http://localhost:8000/graphql
 ```
 
+- Para acessar as rotas privadas faça autenticação e envie o token JWT via HTTP HEADERS como o exemplo abaixo:
+
+```
+{
+    Authorization: "JWT yJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imdlb3JnZXN1ZWRnc0BnbWFpbC5jb20iLCJleHAiOjE2MTgyNjAyNTEsIm9yaWdJYXQiOjE2MTgyNTk2NTF9.lIJ58zZftHSdy4VRbtQ3H6VkxNwr4c-nx0gMXGdvvrA"
+}
+```
 Pronto!

@@ -10,7 +10,7 @@ services:
         ports:
             - 5432:5432    
         env_file: 
-            - ./db/.env
+            - ./db/.env.dev
         volumes: 
             - pg_data:/var/lib/postgresql/data
         networks: 
@@ -22,17 +22,29 @@ services:
             context: .
             dockerfile: Dockerfile
         env_file: 
-            - ./ecommerce/.env
-        expose:
-            - 8000
+            - ./ecommerce/.env.dev
+        ports:
+            - 80:8000
         volumes:
             - ./ecommerce/:/app
         networks: 
             - backend
-
+        command: "gunicorn --workers=4 core.wsgi:application --bind 0.0.0.0:8000"
+    
+    nginx:
+        build: 
+            context: ./nginx
+            dockerfile: Dockerfile
+        volumes:
+            - static_volume:/home/app/web/staticfiles
+        ports:
+            - 80
+        depends_on:
+            - web
 
 volumes:    
     pg_data:
+    static_volume:
 
 networks: 
     backend:

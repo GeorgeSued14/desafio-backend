@@ -24,7 +24,7 @@ SECRET_KEY = str(get_random_secret_key())
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://desafio-klutch.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
