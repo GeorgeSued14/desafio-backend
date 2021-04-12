@@ -39,13 +39,13 @@ git clone https://github.com/GeorgeSued14/desafio-backend.git
 > cd desafio-backend
 > docker-compose -f docker-compose.dev.yml build
 > docker-compose -f docker-compose.dev.yml up -d 
-> docker exec -it django /bin/sh -c "python manage.py makemigrations && 
+> docker exec -it web /bin/sh -c "python manage.py makemigrations && 
 python manage.py migrate"
 ``` 
 - Para criar o usuário root da aplicação
 
 ```
-docker exec -it django /bin/sh -c "python manage.py createsuperuser"
+docker exec -it web /bin/sh -c "python manage.py createsuperuser"
 ```
 
 - No navegador digite:
