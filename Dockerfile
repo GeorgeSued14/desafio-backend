@@ -3,8 +3,11 @@ FROM python:3.8.3
 RUN mkdir /app
 WORKDIR /app
 
-ENV PYTHONUNBUFFERED 1
-ENV LANG C.UTF-8
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    DJANGO_SETTINGS_MODULE=config.settings.prod \
+    PORT=8000 \
+    WEB_CONCURRENCY=3
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         tzdata \
@@ -27,7 +30,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip3 install --upgrade pip 
 RUN pip3 install psycopg2 pipenv
 
-COPY ./Pipfile /app/Pipfile
+COPY ./ecommerce/Pipfile /app/Pipfile
 RUN pipenv install --skip-lock --system --dev
 
 COPY ./ecommerce/ /app/
+
+RUN python manage.py collectstatic --noinput --clear
+RUN python manage.py migrate

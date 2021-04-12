@@ -1,3 +1,2 @@
 ecommerce/requirements.txt
 ecommerce/Dockerfile.dev
-setup_dev.sh
